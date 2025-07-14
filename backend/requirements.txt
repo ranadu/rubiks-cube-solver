@@ -1,4 +1,4 @@
 fastapi
-uvicorn
-rubik-solver
+uvicorn[standard]
 pydantic
+kociemba
