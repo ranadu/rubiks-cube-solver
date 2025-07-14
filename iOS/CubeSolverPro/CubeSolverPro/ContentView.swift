@@ -73,7 +73,7 @@ struct ContentView: View {
         loading = true
         solution = []
 
-        guard let url = URL(string: "http://127.0.0.1:8000/solve") else {
+        guard let url = URL(string: "https://rubiks-cube-solver-xojx.onrender.com/solve") else {
             errorMessage = "Invalid server URL."
             loading = false
             return
