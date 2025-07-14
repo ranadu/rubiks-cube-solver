@@ -1,17 +1,18 @@
 import SwiftUI
 
 struct Move: Codable, Identifiable {
-    var id: UUID = UUID()
+    var id = UUID()  // Generate locally
     let move: String
     let hint: String
+
+    // Only decode move + hint from JSON
+    private enum CodingKeys: String, CodingKey {
+        case move, hint
+    }
 }
 
 struct CubeResponse: Codable {
-    let solution: [Move]
-
-    enum CodingKeys: String, CodingKey {
-        case solution = "Solution"
-    }
+    let solution: [Move]  // JSON uses lowercase "solution"
 }
 
 struct ContentView: View {
