@@ -8,6 +8,10 @@ struct Move: Codable, Identifiable {
 
 struct CubeResponse: Codable {
     let solution: [Move]
+
+    enum CodingKeys: String, CodingKey {
+        case solution = "Solution"
+    }
 }
 
 struct ContentView: View {
@@ -81,7 +85,7 @@ struct ContentView: View {
         let payload = ["cube": cubeString]
 
         do {
-            request.httpBody = try JSONEncoder().encode(payload)
+            request.httpBody = try JSONSerialization.data(withJSONObject: payload, options: [])
         } catch {
             errorMessage = "Failed to encode request."
             loading = false
@@ -100,6 +104,8 @@ struct ContentView: View {
                     self.errorMessage = "No data received."
                     return
                 }
+
+                print(String(data: data, encoding: .utf8) ?? "❌ No data or unreadable format")
 
                 do {
                     let decoded = try JSONDecoder().decode(CubeResponse.self, from: data)
